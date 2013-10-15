@@ -1,0 +1,9 @@
+django
+django-countries
+django-celery
+multiprocessing
+python-dateutil
+pygeoip
+pycurl
+lxml
+grab==0.4.8
