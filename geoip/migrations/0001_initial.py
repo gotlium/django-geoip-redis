@@ -54,7 +54,7 @@ class Migration(SchemaMigration):
         db.create_table('geoip_provider', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=255)),
-            ('ranges', self.gf('django.db.models.fields.TextField')()),
+            ('ranges', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
         ))
         db.send_create_signal('geoip', ['Provider'])
 
@@ -141,9 +141,9 @@ class Migration(SchemaMigration):
         'geoip.provider': {
             'Meta': {'object_name': 'Provider'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'isp': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['geoip.ISP']", 'symmetrical': 'False'}),
+            'isp': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['geoip.ISP']", 'symmetrical': 'False', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '255'}),
-            'ranges': ('django.db.models.fields.TextField', [], {})
+            'ranges': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'})
         },
         'geoip.range': {
             'Meta': {'object_name': 'Range'},

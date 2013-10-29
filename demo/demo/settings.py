@@ -123,8 +123,9 @@ INSTALLED_APPS = (
     'grappelli',
     'django.contrib.admin',
 
+    'django_extensions',
     'south',
-    #'djcelery',
+    'djcelery',
     'geoip',
 )
 

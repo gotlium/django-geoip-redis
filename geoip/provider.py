@@ -15,20 +15,32 @@ class LinkIspWithProvider():
         return ipaddress.ip_network(self.ip, strict=False)
 
     def get_start(self):
-        return inet_aton(self.get_network().network_address)
+        return inet_aton(str(self.get_network().network_address))
 
     def get_end(self):
-        return inet_aton(self.get_network().broadcast_address)
+        return inet_aton(str(self.get_network().broadcast_address))
 
-    def save(self):
+    def get_range(self):
         start = self.get_start()
         end = self.get_end()
+        return Range.by(start, end)
 
-        for ip_range in Range.by(start, end):
+    def save_ip(self):
+        for ip_range in self.get_range():
             ip_range.set_provider(self.provider)
             self.provider.add_isp(ip_range.isp)
 
+    def save_by_range(self):
+        for ip in self.provider.ranges.strip().split("\n"):
+            if ip:
+                self.ip = unicode(ip)
+                self.save_ip()
+
+    def save_by_isp(self):
+        for isp in self.provider.isp.all():
+            Range.objects.filter(isp=isp).update(provider=self.provider)
+
     def run(self, instance):
         self.provider = instance
-        for ip in instance.ranges.split("\n"):
-            self.ip = unicode(ip)
+        self.save_by_range()
+        self.save_by_isp()

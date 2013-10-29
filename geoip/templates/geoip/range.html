@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Check range</title>
+</head>
+<body>
+
+{% for msg in messages %}
+  {{ msg }}<br>
+{% endfor %}
+
+<form action="" method="post">
+  {% csrf_token %}
+  <p>
+    <textarea name="range" cols="75" rows="15"></textarea>
+  </p>
+
+  <p>
+    <input type="submit" value="Check">
+  </p>
+</form>
+
+</body>
+</html>

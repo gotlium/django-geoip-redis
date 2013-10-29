@@ -2,6 +2,8 @@
 
 from django.db import models
 
+from geoip.redis_wrapper import RedisSync
+
 
 class Country(models.Model):
     code = models.CharField('Country code', max_length=2, primary_key=True)
@@ -11,8 +13,8 @@ class Country(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Country'
-        verbose_name_plural = 'Countries'
+        verbose_name = u'Страна'
+        verbose_name_plural = u'Страны'
 
 
 class Area(models.Model):
@@ -23,8 +25,8 @@ class Area(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Area'
-        verbose_name_plural = 'Area'
+        verbose_name = u'Область'
+        verbose_name_plural = u'Областя'
         unique_together = (('country', 'name'), )
 
 
@@ -40,8 +42,8 @@ class City(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'City'
-        verbose_name_plural = 'Cities'
+        verbose_name = u'Город'
+        verbose_name_plural = u'Города'
         unique_together = (('area', 'name'), )
 
 
@@ -53,26 +55,27 @@ class ISP(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'ISP'
-        verbose_name_plural = "ISP's"
+        verbose_name = u'ISP'
+        verbose_name_plural = u"ISP's"
         unique_together = (('country', 'name'), )
 
 
 class Provider(models.Model):
     name = models.CharField('Provider', max_length=255, unique=True)
-    isp = models.ManyToManyField(ISP)
-    ranges = models.TextField(u'Provider ip ranges')
+    isp = models.ManyToManyField(ISP, blank=True)
+    ranges = models.TextField(u'Provider ip ranges', blank=True, null=True)
 
     def add_isp(self, isp):
-        self.isp.add(isp)
-        self.save()
+        if isp and not self.isp.filter(pk=isp.pk).exists():
+            self.isp.add(isp)
+            self.save()
 
     def __unicode__(self):
         return self.name
 
     class Meta:
-        verbose_name = 'Provider'
-        verbose_name_plural = 'Providers'
+        verbose_name = u'Провайдер'
+        verbose_name_plural = u'Провайдеры'
 
 
 class Range(models.Model):
@@ -86,12 +89,21 @@ class Range(models.Model):
 
     @classmethod
     def by(cls, start, end):
-        return cls.objects.filter(start_ip__lte=start, end_ip__gte=end)
+        return cls.objects.filter(
+            start_ip__lte=start, end_ip__gte=end
+        ).order_by('end_ip', '-start_ip')
+
+    @classmethod
+    def sync_with_redis(cls):
+        sync = RedisSync()
+        sync.clean_all()
+        for obj in cls.objects.all().order_by('id'):
+            sync.sync_instance(obj)
 
     def set_provider(self, provider):
         self.provider = provider
         self.save()
 
     class Meta:
-        verbose_name = 'IP range'
-        verbose_name_plural = "IP ranges"
+        verbose_name = u'Диапазон'
+        verbose_name_plural = u"Диапазоны"

@@ -15,13 +15,20 @@ def inet_aton(ip):
 def _from_redis(ip):
     r = RedisClient()
 
-    res, score = r.zrangebyscore("geoip", ip, 'inf', 0, 1, withscores=True)[0]
-    geo_id, junk, prefix = res.split(":", 2)
+    data = r.zrangebyscore("geoip", ip, 'inf', 0, 1, withscores=True)
 
-    if prefix == "s" and float(score) > ip:
+    if not data:
         return
 
-    return r.hgetall("geoip:" + geo_id)
+    res, score = data[0]
+    geo_id, junk, prefix = res.split(":", 2)
+
+    if prefix == "s" and score > ip:
+        return
+
+    info = r.get("geoip:" + junk)
+    if info is not None:
+        return info.split(':')
 
 
 def _from_db(ip):
@@ -31,4 +38,4 @@ def _from_db(ip):
 
 
 def record_by_addr(ip):
-    (_from_redis if BACKEND == 'redis' else _from_db)(inet_aton(ip))
+    return (_from_redis if BACKEND == 'redis' else _from_db)(inet_aton(ip))

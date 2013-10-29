@@ -33,12 +33,14 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'redis',
-        'ipaddress',
         'django',
+        'redis==2.8.0',
+        'ipaddress==1.0.6',
+        'progressbar==2.3',
+        'hiredis>=0.1.1',
+        'grab==0.4.8',
         'pycurl',
         'lxml',
-        'grab == 0.4.8',
-        'progressbar==2.3dev',
+        'django-celery',
     ]
 )
