@@ -21,14 +21,14 @@ def _from_redis(ip):
         return
 
     res, score = data[0]
-    geo_id, junk, prefix = res.split(":", 2)
+    geo_id, junk, prefix = res.decode().split(":", 2)
 
     if prefix == "s" and score > ip:
         return
 
-    info = r.get("geoip:" + junk)
+    info = r.get("geoip:%s" % junk)
     if info is not None:
-        return info.split(':')
+        return info.decode().split(':')
 
 
 def _from_db(ip):

@@ -33,7 +33,7 @@ class LinkIspWithProvider():
     def save_by_range(self):
         for ip in self.provider.ranges.strip().split("\n"):
             if ip:
-                self.ip = unicode(ip)
+                self.ip = ip
                 self.save_ip()
 
     def save_by_isp(self):

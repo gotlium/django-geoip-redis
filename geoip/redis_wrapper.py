@@ -28,8 +28,7 @@ class RedisSync(RedisClient):
     def _get_val(self, key):
         if not hasattr(getattr(self.instance, key), defaults.REDIS_TYPE):
             return '*'
-        return unicode(
-            getattr(getattr(self.instance, key), defaults.REDIS_TYPE))
+        return getattr(getattr(self.instance, key), defaults.REDIS_TYPE)
 
     def save_data(self):
         self.set(

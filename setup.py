@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-geoip-redis',
-    version="1.0.1",
+    version="1.1",
     description='Django GeoIP. Based on default DB or Redis.',
     keywords='django geoip mysql redis',
     long_description=open('README.rst').read(),
@@ -33,7 +33,6 @@ setup(
         'redis>=2.8.0',
         'hiredis>=0.1.1',
         'ipaddress>=1.0.6',
-        'progressbar>=2.3',
         'django-celery>=3.0.23',
     ]
 )
