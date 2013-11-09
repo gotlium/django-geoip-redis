@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-geoip-redis',
-    version="1.0",
+    version="1.0.1",
     description='Django GeoIP. Based on default DB or Redis.',
     keywords='django geoip mysql redis',
     long_description=open('README.rst').read(),
@@ -27,20 +27,13 @@ setup(
     url='https://github.com/gotlium/django-geoip-redis',
     license='GPL v3',
     packages=find_packages(exclude=['demo']),
-    package_data={'geoip': [
-        'data/agents.txt',
-    ]},
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'django',
-        'redis==2.8.0',
-        'ipaddress==1.0.6',
-        'progressbar==2.3',
+        'redis>=2.8.0',
         'hiredis>=0.1.1',
-        'grab==0.4.8',
-        'pycurl',
-        'lxml',
-        'django-celery',
+        'ipaddress>=1.0.6',
+        'progressbar>=2.3',
+        'django-celery>=3.0.23',
     ]
 )

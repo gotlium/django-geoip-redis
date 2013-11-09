@@ -4,18 +4,18 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('root', 'root@localhost'),
 )
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'geo_ip',
-        'USER': 'root',
-        'PASSWORD': 'metallica',
-        'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': '',
     }
 }
@@ -124,8 +124,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     'django_extensions',
+    # 'djcelery',
     'south',
-    'djcelery',
     'geoip',
 )
 
@@ -160,5 +160,6 @@ LOGGING = {
 
 GRAPPELLI_ADMIN_TITLE = 'Demo'
 
-PROXY_LIST_USE_CELERY = True
-PROXY_LIST_ELAPSED_TIME = 1.0
+GEO_BACKEND = 'redis'
+GEO_REDIS_TYPE = 'name'
+GEO_REDIS_DB = 4

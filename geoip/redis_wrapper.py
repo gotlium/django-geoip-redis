@@ -34,7 +34,7 @@ class RedisSync(RedisClient):
     def save_data(self):
         self.set(
             "geoip:%d" % self.instance.pk,
-            "%s:%s:%s:%s:%s:" % (
+            "%s:%s:%s:%s:%s" % (
                 self._get_val('country'),
                 self._get_val('area'),
                 self._get_val('city'),
