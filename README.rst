@@ -45,7 +45,7 @@ Tested on Ubuntu 12.04(x86_64), Django(1.6), uWSGI(1.0.3), Nginx(1.1.19) with Ap
 
 .. code-block:: bash
 
-$ ab -c 100 -n 1000 http://django.dev/ip/91.195.136.52/
+$ ab -c 100 -n 1000 http://localhost/ip/91.195.136.52/
 
 
 
