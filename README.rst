@@ -31,7 +31,7 @@ Demo installation:
 
 
 If you want use native db for local development,
-you can add ``GEO_BACKEND = 'db'`` into your local_settings.py
+you can add ``GEO_BACKEND = 'db'`` into local_settings.py
 
 
 Stats:
@@ -40,8 +40,7 @@ Stats:
 * Redis: 3548 rps
 
 
-Tested on Ubuntu 12.04 x86_64, Django 1.6, uWSGI 1.0.3, nginx 1.1.19.
-Apache Benchmark cmd:
+Tested on Ubuntu 12.04(x86_64), Django(1.6), uWSGI(1.0.3), Nginx(1.1.19) with Apache Benchmark:
 
 
 .. code-block:: bash
