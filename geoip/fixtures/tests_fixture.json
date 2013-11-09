@@ -1,0 +1,58 @@
+[
+    {
+        "pk": 4835,
+        "model": "geoip.isp",
+        "fields": {
+            "country": "RU",
+            "name": "TVK-NET"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "geoip.provider",
+        "fields": {
+            "ranges": "",
+            "isp": [4835],
+            "name": "MTS"
+        }
+    },
+    {
+        "pk": 1878,
+        "model": "geoip.city",
+        "fields": {
+            "latitude": "36.069492",
+            "name": "Orel",
+            "longitude": "52.968452",
+            "area": 102
+        }
+    },
+    {
+        "pk": 102,
+        "model": "geoip.area",
+        "fields": {
+            "country": "RU",
+            "name": "Orel oblast"
+        }
+    },
+    {
+        "pk": "RU",
+        "model": "geoip.country",
+        "fields": {
+            "name": "Russian Federation"
+        }
+    },
+    {
+        "pk": 61045,
+        "model": "geoip.range",
+        "fields": {
+            "city": 1878,
+            "area": 102,
+            "country": "RU",
+            "isp": 4835,
+            "end_ip": 1539541503,
+            "provider": 1,
+            "start_ip": 1539540992
+        }
+    }
+
+]

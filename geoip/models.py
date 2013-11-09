@@ -1,38 +1,39 @@
 # -*- coding: utf-8 -*-
 
+from django.utils.translation import ugettext as _
 from django.db import models
 
 from geoip.redis_wrapper import RedisSync
 
 
 class Country(models.Model):
-    code = models.CharField('Country code', max_length=2, primary_key=True)
-    name = models.CharField('Country name', max_length=255, unique=True)
+    code = models.CharField(_('Country code'), max_length=2, primary_key=True)
+    name = models.CharField(_('Country name'), max_length=255, unique=True)
 
     def __unicode__(self):
         return self.name
 
     class Meta:
-        verbose_name = u'Страна'
-        verbose_name_plural = u'Страны'
+        verbose_name = _('Country')
+        verbose_name_plural = _('Countries')
 
 
 class Area(models.Model):
     country = models.ForeignKey(Country)
-    name = models.CharField('Area', max_length=255)
+    name = models.CharField(_('Area'), max_length=255)
 
     def __unicode__(self):
         return self.name
 
     class Meta:
-        verbose_name = u'Область'
-        verbose_name_plural = u'Областя'
+        verbose_name = _('Area')
+        verbose_name_plural = _('Areas')
         unique_together = (('country', 'name'), )
 
 
 class City(models.Model):
     area = models.ForeignKey(Area)
-    name = models.CharField('City name', max_length=255)
+    name = models.CharField(_('City name'), max_length=255)
     latitude = models.DecimalField(
         max_digits=9, decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(
@@ -42,8 +43,8 @@ class City(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = u'Город'
-        verbose_name_plural = u'Города'
+        verbose_name = _('City')
+        verbose_name_plural = _('Cities')
         unique_together = (('area', 'name'), )
 
 
@@ -61,9 +62,10 @@ class ISP(models.Model):
 
 
 class Provider(models.Model):
-    name = models.CharField('Provider', max_length=255, unique=True)
+    name = models.CharField(_('Provider'), max_length=255, unique=True)
     isp = models.ManyToManyField(ISP, blank=True)
-    ranges = models.TextField(u'Provider ip ranges', blank=True, null=True)
+    ranges = models.TextField(
+        _('Provider network ranges'), blank=True, null=True)
 
     def add_isp(self, isp):
         if isp and not self.isp.filter(pk=isp.pk).exists():
@@ -74,13 +76,13 @@ class Provider(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = u'Провайдер'
-        verbose_name_plural = u'Провайдеры'
+        verbose_name = _('Provider')
+        verbose_name_plural = _("Providers")
 
 
 class Range(models.Model):
-    start_ip = models.BigIntegerField('Start', db_index=True)
-    end_ip = models.BigIntegerField('End', db_index=True)
+    start_ip = models.BigIntegerField(_('Start range'), db_index=True)
+    end_ip = models.BigIntegerField(_('End range'), db_index=True)
     country = models.ForeignKey(Country)
     area = models.ForeignKey(Area, null=True)
     city = models.ForeignKey(City, null=True)
@@ -105,5 +107,5 @@ class Range(models.Model):
         self.save()
 
     class Meta:
-        verbose_name = u'Диапазон'
-        verbose_name_plural = u"Диапазоны"
+        verbose_name = _('IP range')
+        verbose_name_plural = _("IP ranges")

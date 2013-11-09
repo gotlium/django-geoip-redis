@@ -1,7 +1,13 @@
 Django-GeoIP-Redis
 ==================
 
+.. image:: https://api.travis-ci.org/gotlium/django-geoip-redis.png?branch=master
+    :alt: Build Status
+    :target: https://travis-ci.org/gotlium/django-geoip-redis
+
+
 Demo installation:
+------------------
 
 .. code-block:: bash
 
@@ -11,10 +17,9 @@ Demo installation:
     $ python setup.py develop
     $ cd demo
     $ pip install -r requirements.txt
-    $ python manage.py syncdb
+    $ python manage.py syncdb --noinput
     $ python manage.py migrate
     $ python manage.py loaddata ../fixtures/db.json
-    $ python manage.py runserver
     $ python manage.py sync_with_redis
     $ python manage.py shell
 
@@ -27,6 +32,21 @@ Demo installation:
 
 If you want use native db for local development,
 you can add ``GEO_BACKEND = 'db'`` into your local_settings.py
+
+
+Stats:
+-----
+* MySQL(SSD): 728 rps
+* Redis: 3548 rps
+
+
+Tested on Ubuntu 12.04 x86_64, Django 1.6, uWSGI 1.0.3, nginx 1.1.19.
+Apache Benchmark cmd:
+
+
+.. code-block:: bash
+
+$ ab -c 100 -n 1000 http://django.dev/ip/91.195.136.52/
 
 
 
