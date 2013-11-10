@@ -5,6 +5,7 @@ Django-GeoIP-Redis
     :alt: Build Status
     :target: https://travis-ci.org/gotlium/django-geoip-redis
 .. image:: https://pypip.in/v/django-geoip-redis/badge.png
+    :alt: Current version on PyPi
     :target: https://crate.io/packages/django-geoip-redis/
 
 
@@ -24,7 +25,6 @@ Demo installation:
     $ python manage.py syncdb --noinput
     $ python manage.py migrate
     $ python manage.py loaddata ../fixtures/db.json
-    $ python manage.py sync_with_redis
     $ python manage.py shell
 
 
@@ -42,15 +42,18 @@ Performance:
 -----------
 * MySQL(SSD): 728 rps
 * SQLite(SSD): 46 rps
-* Redis: 3548 rps
+* Redis: **3548 rps**
 
 
 Tested on Ubuntu 12.04(x86_64), Django(1.6), uWSGI(1.0.3), Nginx(1.1.19) with Apache Benchmark:
 
-
 .. code-block:: bash
 
-$ ab -c 100 -n 1000 http://localhost/ip/91.195.136.52/
+    $ ab -c 100 -n 1000 http://localhost/ip/91.195.136.52/
+
+
+| Used default configuration for Redis & MySQL without any modifications.
+
 
 
 Compatibility:
