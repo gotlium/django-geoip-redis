@@ -28,7 +28,7 @@ def _from_redis(ip):
 
     info = r.get("geoip:%s" % junk)
     if info is not None:
-        return info.decode().split(':')
+        return info.decode('utf-8', 'ignore').split(':')
 
 
 def _from_db(ip):
