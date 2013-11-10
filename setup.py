@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-geoip-redis',
-    version="1.1.2",
+    version="1.1.3",
     description='Django GeoIP. Based on default DB or Redis.',
     keywords='django geoip mysql redis',
     long_description=open('README.rst').read(),
@@ -29,6 +29,11 @@ setup(
     license='GPL v3',
     packages=find_packages(exclude=['demo']),
     include_package_data=True,
+    package_data={'geoip': [
+        'templates/geoip/admin/change_list_link.html',
+        'templates/geoip/admin/sync.html',
+        'templates/geoip/range.html',
+    ]},
     zip_safe=False,
     install_requires=[
         'redis>=2.8.0',
