@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from django import VERSION
+
+
 DATABASE_ENGINE = 'sqlite3'
 
 SITE_ID = 1
@@ -30,9 +33,7 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 )
 
-import django
-
-if django.VERSION[:2] < (1, 6):
+if VERSION[:2] < (1, 6):
     TEST_RUNNER = 'discover_runner.DiscoverRunner'
 
 GEO_REDIS_TYPE = 'pk'

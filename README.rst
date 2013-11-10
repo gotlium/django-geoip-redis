@@ -4,6 +4,8 @@ Django-GeoIP-Redis
 .. image:: https://api.travis-ci.org/gotlium/django-geoip-redis.png?branch=master
     :alt: Build Status
     :target: https://travis-ci.org/gotlium/django-geoip-redis
+.. image:: https://pypip.in/v/django-geoip-redis/badge.png
+    :target: https://crate.io/packages/django-geoip-redis/
 
 
 Demo installation:

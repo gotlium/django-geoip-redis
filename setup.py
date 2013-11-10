@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-geoip-redis',
-    version="1.1",
+    version="1.1.1",
     description='Django GeoIP. Based on default DB or Redis.',
     keywords='django geoip mysql redis',
     long_description=open('README.rst').read(),
@@ -20,7 +20,8 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
-        'Topic :: Internet :: Proxy Servers',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
     ],
     author="GoTLiuM InSPiRiT",
     author_email='gotlium@gmail.com',
