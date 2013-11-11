@@ -30,8 +30,8 @@ Demo installation:
 
 .. code-block:: python
 
-    >>> from geoip import record_by_addr
-    >>> print (','.join(record_by_addr('91.195.136.52')))
+    >>> from geoip import record_by_ip_as_dict
+    >>> print (record_by_ip_as_dict('91.195.136.52'))
 
 
 If you want use native db for local development,
@@ -40,10 +40,21 @@ you can add ``GEO_BACKEND = 'db'`` into local_settings.py
 
 Performance:
 -----------
-* MySQL(SSD): 728 rps
-* SQLite(SSD): 46 rps
-* Redis: **3548 rps**
+* django-geoip-redis:
+    - MySQL(SSD): 728 rps
+    - SQLite(SSD): 46 rps
+    - Redis: **3548 rps**
 
+* django-geoip(no isp, no provider):
+    - MySQL(SSD): 855 rps
+    - SQLite(SSD): 47 rps
+
+* django.contrib.gis.geoip.GeoIP(no isp, no provider, but C API):
+    - standard: 4666 rps
+    - memory: 73 rps
+    - check: 4510 rps
+    - index: 76 rps
+    - mmap: 4425 rps
 
 Tested on Ubuntu 12.04(x86_64), Django(1.6), uWSGI(1.0.3), Nginx(1.1.19) with Apache Benchmark:
 
@@ -52,7 +63,7 @@ Tested on Ubuntu 12.04(x86_64), Django(1.6), uWSGI(1.0.3), Nginx(1.1.19) with Ap
     $ ab -c 100 -n 1000 http://localhost/ip/91.195.136.52/
 
 
-| Used default configuration for Redis & MySQL without any modifications.
+| On tests used default configuration for Redis & MySQL without any modifications.
 
 
 

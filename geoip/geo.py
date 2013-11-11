@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 
+__all__ = ["inet_aton", "record_by_ip", "record_by_request", "get_ip",
+           "record_by_ip_as_dict", "record_by_request_as_dict"]
+
 import struct
 import socket
 
+from geoip.defaults import BACKEND, REDIS_TYPE
 from geoip.redis_wrapper import RedisClient
-from geoip.defaults import BACKEND
 from geoip.models import Range
 
 
-def inet_aton(ip):
-    return struct.unpack('!L', socket.inet_aton(ip))[0]
+_RECORDS_KEYS = ('country', 'area', 'city', 'isp', 'provider')
 
 
 def _from_redis(ip):
@@ -32,10 +34,36 @@ def _from_redis(ip):
 
 
 def _from_db(ip):
-    return Range.objects.filter(
+    obj = Range.objects.select_related().filter(
         start_ip__lte=ip, end_ip__gte=ip
     ).order_by('end_ip', '-start_ip')[:1][0]
+    if REDIS_TYPE == 'pk':
+        return map(lambda k: str(getattr(obj, k).pk), _RECORDS_KEYS)
+    return map(lambda k: str(getattr(obj, k)), _RECORDS_KEYS)
 
 
-def record_by_addr(ip):
+def inet_aton(ip):
+    return struct.unpack('!L', socket.inet_aton(ip))[0]
+
+
+def get_ip(request):
+    ip = request.META['REMOTE_ADDR']
+    if 'HTTP_X_FORWARDED_FOR' in request.META:
+        ip = request.META['HTTP_X_FORWARDED_FOR'].split(',')[0]
+    return ip
+
+
+def record_by_ip(ip):
     return (_from_redis if BACKEND == 'redis' else _from_db)(inet_aton(ip))
+
+
+def record_by_request(request):
+    return record_by_ip(get_ip(request))
+
+
+def record_by_ip_as_dict(ip):
+    return dict(zip(_RECORDS_KEYS, record_by_ip(ip)))
+
+
+def record_by_request_as_dict(request):
+    return dict(zip(_RECORDS_KEYS, record_by_ip(get_ip(request))))

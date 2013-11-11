@@ -3,13 +3,24 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from geoip.provider import LinkIspWithProvider
-from geoip.geo import record_by_addr
+from geoip.geo import record_by_ip
 from geoip.defaults import BACKEND
+
+
+def home(request):
+    """
+    If middleware was installed, you can get geo info from request.geo
+    Example:
+        print request.geo
+    """
+    return HttpResponse("""
+        <a href="/ip/91.195.136.52/">IP info</a>
+    """)
 
 
 def ip_view(request, ip=None):
     ip = ip if ip else request.META.get('REMOTE_ADDR')
-    record = record_by_addr(ip)
+    record = record_by_ip(ip)
     if record:
         if BACKEND == 'db':
             data = (
