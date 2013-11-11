@@ -7,6 +7,9 @@ If you wish to contribute, please add corresponding tests.
 
 .. image:: https://api.travis-ci.org/gotlium/django-geoip-redis.png?branch=master
     :target: https://travis-ci.org/gotlium/django-geoip-redis
+.. image:: https://coveralls.io/repos/gotlium/django-geoip-redis/badge.png?branch=master
+    :target: https://coveralls.io/r/gotlium/django-geoip-redis?branch=master
+
 
 Running tests::
 

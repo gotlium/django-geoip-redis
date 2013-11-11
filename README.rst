@@ -7,6 +7,11 @@ Django-GeoIP-Redis
 .. image:: https://pypip.in/v/django-geoip-redis/badge.png
     :alt: Current version on PyPi
     :target: https://crate.io/packages/django-geoip-redis/
+.. image:: https://pypip.in/d/django-geoip-redis/badge.png
+    :alt: Downloads from PyPi
+    :target: https://crate.io/packages/django-geoip-redis/
+.. image:: https://coveralls.io/repos/gotlium/django-geoip-redis/badge.png?branch=master
+    :target: https://coveralls.io/r/gotlium/django-geoip-redis?branch=master
 
 Documentation available at `Read the Docs <http://django-geoip-redis.readthedocs.org/>`_.
 
