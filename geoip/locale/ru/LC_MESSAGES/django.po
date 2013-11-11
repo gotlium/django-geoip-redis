@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.2\n"
+"Report-Msgid-Bugs-To: gotlium@gmail.com\n"
+"POT-Creation-Date: 2013-11-11 18:32+0000\n"
+"PO-Revision-Date: 2013-11-11 18:32+0000\n"
+"Last-Translator: gotlium <gotlium@gmail.com>\n"
+"Language-Team: gotlium <gotlium@gmail.com>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+
+#: geoip/models.py:10
+msgid "Country code"
+msgstr "Код страны"
+
+#: geoip/models.py:11
+msgid "Country name"
+msgstr "Наименование страны"
+
+#: geoip/models.py:17
+msgid "Country"
+msgstr "Страна"
+
+#: geoip/models.py:18
+msgid "Countries"
+msgstr "Страны"
+
+#: geoip/models.py:23 geoip/models.py:29
+msgid "Area"
+msgstr "Регион"
+
+#: geoip/models.py:30
+msgid "Areas"
+msgstr "Регионы"
+
+#: geoip/models.py:36
+msgid "City name"
+msgstr "Наименование города"
+
+#: geoip/models.py:46
+msgid "City"
+msgstr "Город"
+
+#: geoip/models.py:47
+msgid "Cities"
+msgstr "Города"
+
+#: geoip/models.py:65 geoip/models.py:79
+msgid "Provider"
+msgstr "Провайдер"
+
+#: geoip/models.py:68
+msgid "Provider network ranges"
+msgstr "Диапазоны провайдера"
+
+#: geoip/models.py:80
+msgid "Providers"
+msgstr "Провайдеры"
+
+#: geoip/models.py:84
+msgid "Start range"
+msgstr "Начало диапазона"
+
+#: geoip/models.py:85
+msgid "End range"
+msgstr "Конец диапазона"
+
+#: geoip/models.py:110
+msgid "IP range"
+msgstr "IP Диапазон"
+
+#: geoip/models.py:111
+msgid "IP ranges"
+msgstr "IP Диапазоны"
+
+msgid "Latitude"
+msgstr "Широта"
+
+msgid "Longitude"
+msgstr "Долгота"

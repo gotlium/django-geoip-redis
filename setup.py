@@ -29,9 +29,9 @@ setup(
     packages=find_packages(exclude=['demo']),
     include_package_data=True,
     package_data={'geoip': [
-        'templates/geoip/admin/change_list_link.html',
-        'templates/geoip/admin/sync.html',
-        'templates/geoip/range.html',
+        'templates/geoip/admin/*.html',
+        'templates/geoip/*.html',
+        'locale/*/LC_MESSAGES/*.po'
     ]},
     zip_safe=False,
     install_requires=[

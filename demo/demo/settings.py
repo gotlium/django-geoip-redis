@@ -167,6 +167,6 @@ GEO_REDIS_DB = 4
 
 
 try:
-    from local_settings import *
+    from .local_settings import *
 except ImportError:
     pass

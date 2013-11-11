@@ -13,7 +13,6 @@ from django.utils.termcolors import colorize
 from requests import get
 
 from geoip.redis_wrapper import RedisSync
-from geoip.models import Range
 from geoip.defaults import DB_IMPORT_URL
 
 

@@ -1,5 +1,4 @@
 include tox.ini
 include requirements/*
-recursive-include geoip/templates/geoip/ *.html
-recursive-include geoip/templates/geoip/admin/ *.html
 recursive-exclude * .DS_Store
+recursive-include geoip *.py *.html *.txt *.po
