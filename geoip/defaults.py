@@ -23,3 +23,7 @@ USE_CELERY = getattr(settings, 'GEO_USE_CELERY',
 REDIS_TYPE = getattr(settings, 'GEO_REDIS_TYPE',
                      'pk' if REDIS_DB == 2 else 'name')
 REDIS_SYNC_LOCK = getattr(settings, 'REDIS_SYNC_LOCK', '/tmp/redis.lock')
+
+DB_IMPORT_URL = getattr(
+    settings, 'GEO_DB_IMPORT_URL',
+    'http://geo-gotlium.rhcloud.com/db.json.zip')

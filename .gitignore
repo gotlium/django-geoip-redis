@@ -3,6 +3,8 @@
 .idea
 *.log
 *.pot
+
+openshift-geo
 local_settings.py
 
 *.py[cod]
@@ -37,4 +39,5 @@ docs/build
 db.sqlite
 
 *.txt
-*sh
+*.sh
+*.zip

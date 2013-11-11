@@ -40,5 +40,6 @@ setup(
         'hiredis>=0.1.1',
         'ipaddress>=1.0.6',
         'django-celery>=3.0.23',
+        'requests>=2.0.1',
     ]
 )

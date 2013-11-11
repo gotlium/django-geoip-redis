@@ -164,3 +164,9 @@ GRAPPELLI_ADMIN_TITLE = 'Demo'
 GEO_BACKEND = 'redis'
 GEO_REDIS_TYPE = 'name'
 GEO_REDIS_DB = 4
+
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
