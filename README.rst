@@ -8,6 +8,8 @@ Django-GeoIP-Redis
     :alt: Current version on PyPi
     :target: https://crate.io/packages/django-geoip-redis/
 
+Documentation available at `Read the Docs <http://django-geoip-redis.readthedocs.org/>`_.
+
 
 Demo installation:
 ------------------
