@@ -5,18 +5,18 @@ import os
 from celery.task import Task
 
 from geoip.defaults import USE_CELERY, REDIS_SYNC_LOCK
-from geoip.provider import LinkIspWithProvider
-from geoip.models import Range
 
 
 class LinkIspWithProviderTask(Task):
     def run(self, *args, **kwargs):
+        from geoip.provider import LinkIspWithProvider
         LinkIspWithProvider().run(*args, **kwargs)
 
 
 class SyncRedisTask(Task):
     def run(self, *args, **kwargs):
         try:
+            from geoip.models import Range
             if not os.path.exists(REDIS_SYNC_LOCK):
                 open(REDIS_SYNC_LOCK, 'w').close()
                 Range.sync_with_redis()

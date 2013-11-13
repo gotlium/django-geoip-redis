@@ -37,4 +37,4 @@ if VERSION[:2] < (1, 6):
     TEST_RUNNER = 'discover_runner.DiscoverRunner'
 
 GEO_REDIS_TYPE = 'pk'
-GEO_REDIS_DB = 5
+GEO_REDIS_DB = 6

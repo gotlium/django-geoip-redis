@@ -17,7 +17,7 @@ and provider.
 
 Here is a basic example::
 
-  from geoip import record_by_ip_as_dict
+  from geoip.geo import record_by_ip_as_dict
 
   ip = '91.195.136.52'
 

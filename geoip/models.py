@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from django.db.models.signals import post_save, m2m_changed
 from django.utils.translation import ugettext as _
+from django.dispatch import receiver
 from django.db import models
 
 from geoip.redis_wrapper import RedisSync
+from geoip.tasks import link_provider_task
+from geoip.defaults import BACKEND
 
 
 class Country(models.Model):
@@ -58,8 +62,8 @@ class ISP(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = u'ISP'
-        verbose_name_plural = u"ISP's"
+        verbose_name = _('ISP')
+        verbose_name_plural = _("ISP's")
         unique_together = (('country', 'name'), )
 
 
@@ -112,3 +116,15 @@ class Range(models.Model):
     class Meta:
         verbose_name = _('IP range')
         verbose_name_plural = _("IP ranges")
+
+
+@receiver(post_save, sender=Range, dispatch_uid="range")
+def save_to_redis(sender, instance, *args, **kwargs):
+    if BACKEND == 'redis':
+        RedisSync().sync_instance(instance)
+
+
+@receiver(m2m_changed, sender=Provider.isp.through, dispatch_uid="provider")
+def save_provider(sender, instance, action, *args, **kwargs):
+    if action == 'post_clear':
+        link_provider_task(instance)
