@@ -45,8 +45,13 @@ class Command(NoArgsCommand):
         try:
             self.__download()
             self.__loaddata()
-        except:
-            sys.stdout.write(' Error\n')
+        except Exception:
+            self._progress_line('error', self._status, '\n', 'red')
+            sys.stdout.write(colorize(
+                sys.exc_info()[1], fg='cyan', opts=('blink',)
+            ))
+            sys.stdout.write("\n")
+            thread.interrupt_main()
         self.__clean()
         self._status = None
 
@@ -62,7 +67,7 @@ class Command(NoArgsCommand):
     def __loaddata(self):
         self._status = 'importing database'
         call_command('loaddata', DB_FILE_NAME, verbosity=0)
-        time.sleep(3)
+        raise Exception('Import error')
 
     def __clean(self):
         self._status = 'cleaning'
