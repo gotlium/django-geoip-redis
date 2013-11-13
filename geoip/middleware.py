@@ -13,7 +13,7 @@ def get_location(request):
         if stored is not None:
             return stored
 
-        from geoip import record_by_request
+        from geoip.geo import record_by_request
 
         request.cached_geo = record_by_request(request)
         request.COOKIES['cached_geo'] = request.cached_geo

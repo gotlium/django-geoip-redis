@@ -37,7 +37,7 @@ Demo installation:
 
 .. code-block:: python
 
-    >>> from geoip import record_by_ip_as_dict
+    >>> from geoip.geo import record_by_ip_as_dict
     >>> print (record_by_ip_as_dict('91.195.136.52'))
 
 

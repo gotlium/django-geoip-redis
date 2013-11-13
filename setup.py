@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-geoip-redis',
-    version="1.2.1",
+    version="1.2.2",
     description='Django GeoIP. Based on default DB or Redis.',
     keywords='django geoip mysql redis',
     long_description=open('README.rst').read(),
