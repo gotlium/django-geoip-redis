@@ -1,3 +1,4 @@
+Default location, if location can not be detect
 Add backend for ipgeobase. Now supported only own db with providers & ISP.
 App usage without djcelery
 Py3.2 support

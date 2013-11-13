@@ -15,7 +15,6 @@ Django-GeoIP-Redis
 
 Documentation available at `Read the Docs <http://django-geoip-redis.readthedocs.org/>`_.
 
-
 Demo installation:
 ------------------
 
@@ -71,7 +70,8 @@ Tested on Ubuntu 12.04(x86_64), Django(1.6), uWSGI(1.0.3), Nginx(1.1.19) with Ap
 
 
 | On tests used default configuration for Redis & MySQL without any modifications.
-
+|
+| Demo page available `here <http://geoip-gotlium.rhcloud.com/ip/91.195.136.52/>`_.
 
 
 Compatibility:
