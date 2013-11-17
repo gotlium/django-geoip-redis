@@ -30,15 +30,24 @@ class RedisSync(RedisClient):
             return '*'
         return getattr(getattr(self.instance, key), defaults.REDIS_TYPE)
 
+    def _get_null_val(self, val):
+        return str(val if val else '*')
+
     def save_data(self):
         self.set(
             "geoip:%d" % self.instance.pk,
-            "%s:%s:%s:%s:%s" % (
+            "%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s" % (
                 self._get_val('country'),
                 self._get_val('area'),
                 self._get_val('city'),
                 self._get_val('isp'),
                 self._get_val('provider'),
+                self._get_val('speed'),
+                self._get_null_val(self.instance.latitude),
+                self._get_null_val(self.instance.longitude),
+                self._get_null_val(self.instance.postal_code),
+                self._get_null_val(self.instance.metro_code),
+                self._get_val('domain'),
             )
         )
 

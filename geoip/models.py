@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import sys
+
 from django.db.models.signals import post_save, m2m_changed
 from django.utils.translation import ugettext as _
 from django.dispatch import receiver
@@ -25,6 +27,8 @@ class Country(models.Model):
 class Area(models.Model):
     country = models.ForeignKey(Country, verbose_name=_('Country'))
     name = models.CharField(_('Area'), max_length=255)
+    #code = models.CharField(_('Area code'), max_length=3)
+    #region_code = models.CharField(_('Region code'), max_length=2)
 
     def __unicode__(self):
         return self.name
@@ -38,12 +42,6 @@ class Area(models.Model):
 class City(models.Model):
     area = models.ForeignKey(Area)
     name = models.CharField(_('City name'), max_length=255)
-    latitude = models.DecimalField(
-        max_digits=9, decimal_places=6, blank=True, null=True,
-        verbose_name=_('Latitude'))
-    longitude = models.DecimalField(
-        max_digits=9, decimal_places=6, blank=True, null=True,
-        verbose_name=_('Longitude'))
 
     def __unicode__(self):
         return self.name
@@ -55,7 +53,7 @@ class City(models.Model):
 
 
 class ISP(models.Model):
-    name = models.CharField('ISP', max_length=255)
+    name = models.CharField('ISP', max_length=75)
     country = models.ForeignKey(Country, verbose_name=_('Country'))
 
     def __unicode__(self):
@@ -86,6 +84,28 @@ class Provider(models.Model):
         verbose_name_plural = _("Providers")
 
 
+class NetSpeed(models.Model):
+    name = models.CharField(_('NetSpeed'), max_length=10, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Net Speed')
+        verbose_name_plural = _("Net Speed")
+
+
+class Domain(models.Model):
+    name = models.CharField(_('Domain name'), max_length=255, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Domain name')
+        verbose_name_plural = _("Domain names")
+
+
 class Range(models.Model):
     start_ip = models.BigIntegerField(_('Start range'), db_index=True)
     end_ip = models.BigIntegerField(_('End range'), db_index=True)
@@ -95,6 +115,18 @@ class Range(models.Model):
     isp = models.ForeignKey(ISP, verbose_name=_('ISP'), null=True)
     provider = models.ForeignKey(
         Provider, verbose_name=_('Provider'), null=True)
+    speed = models.ForeignKey(NetSpeed, verbose_name=_('NetSpeed'), null=True)
+    latitude = models.DecimalField(
+        max_digits=9, decimal_places=6, blank=True, null=True,
+        verbose_name=_('Latitude'))
+    longitude = models.DecimalField(
+        max_digits=9, decimal_places=6, blank=True, null=True,
+        verbose_name=_('Longitude'))
+    postal_code = models.CharField(
+        _('Postal code'), max_length=6, blank=True, null=True)
+    metro_code = models.PositiveIntegerField(
+        _('Metro code'), blank=True, null=True)
+    domain = models.ForeignKey(Domain, verbose_name=_('Domain'), null=True)
 
     @classmethod
     def by(cls, start, end):
@@ -118,13 +150,14 @@ class Range(models.Model):
         verbose_name_plural = _("IP ranges")
 
 
-@receiver(post_save, sender=Range, dispatch_uid="range")
-def save_to_redis(sender, instance, *args, **kwargs):
-    if BACKEND == 'redis':
-        RedisSync().sync_instance(instance)
+if BACKEND == 'redis':
+    @receiver(post_save, sender=Range, dispatch_uid="range")
+    def save_to_redis(sender, instance, *args, **kwargs):
+            RedisSync().sync_instance(instance)
 
 
-@receiver(m2m_changed, sender=Provider.isp.through, dispatch_uid="provider")
-def save_provider(sender, instance, action, *args, **kwargs):
-    if action == 'post_clear':
-        link_provider_task(instance)
+if not 'loaddata' in sys.argv:
+    @receiver(m2m_changed, sender=Provider.isp.through, dispatch_uid="prov")
+    def save_provider(sender, instance, action, *args, **kwargs):
+        if action == 'post_clear':
+            link_provider_task(instance)

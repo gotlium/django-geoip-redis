@@ -6,3 +6,8 @@ coverage:
 	coverage report --omit="geoip/test*,geoip/migrations/*,geoip/management/*"
 sphinx:
 	cd docs && sphinx-build -b html -d .build/doctrees . .build/html
+pep8:
+	flake8 --exclude=migrations geoip
+open_docs:
+	open docs/.build/html/index.html
+

@@ -2,15 +2,12 @@ Django-GeoIP-Redis
 ==================
 
 .. image:: https://api.travis-ci.org/gotlium/django-geoip-redis.png?branch=master
-    :alt: Build Status
     :target: https://travis-ci.org/gotlium/django-geoip-redis
 .. image:: https://coveralls.io/repos/gotlium/django-geoip-redis/badge.png?branch=master
     :target: https://coveralls.io/r/gotlium/django-geoip-redis?branch=master
 .. image:: https://pypip.in/v/django-geoip-redis/badge.png
-    :alt: Current version on PyPi
     :target: https://crate.io/packages/django-geoip-redis/
 .. image:: https://pypip.in/d/django-geoip-redis/badge.png
-    :alt: Downloads from PyPi
     :target: https://crate.io/packages/django-geoip-redis/
 
 Documentation available at `Read the Docs <http://django-geoip-redis.readthedocs.org/>`_.
@@ -55,7 +52,7 @@ Performance:
     - MySQL(SSD): 855 rps
     - SQLite(SSD): 47 rps
 
-* django.contrib.gis.geoip.GeoIP(no isp, no provider, but C API):
+* django.contrib.gis.geoip.GeoIP(no isp, no provider, not free, but C API):
     - standard: 4666 rps
     - memory: 73 rps
     - check: 4510 rps

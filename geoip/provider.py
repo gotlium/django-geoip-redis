@@ -31,9 +31,11 @@ class LinkIspWithProvider():
             self.provider.add_isp(ip_range.isp)
 
     def save_by_range(self):
+        if not self.provider.ranges:
+            return
         for ip in self.provider.ranges.strip().split("\n"):
-            if ip:
-                self.ip = ip
+            if ip.strip():
+                self.ip = ip.strip()
                 self.save_ip()
 
     def save_by_isp(self):

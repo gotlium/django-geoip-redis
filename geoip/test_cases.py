@@ -5,7 +5,10 @@ from django.test import TestCase
 from geoip import geo
 
 
-LIST_DATA = ['RU', '102', '1878', '4835', '1']
+LIST_DATA = [
+    'RU', '102', '1878', '4835', '1', '*', '36.069492', '52.968452',
+    '*', '*', '*'
+]
 
 
 class GeoIPTestCase(TestCase):

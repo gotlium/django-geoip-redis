@@ -16,7 +16,7 @@ between all entities, i.e. Country has many Regions, Region has many Cities,
 ISP has many Country, Provider has many ISP.
 
 .. automodule:: geoip.models
-   :members: Country, Area, City, ISP, Provider
+   :members: Country, Area, City, ISP, Provider, NetSpeed
 
 
 .. _iprange:

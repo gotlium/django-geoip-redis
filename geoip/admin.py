@@ -4,9 +4,11 @@ from django.conf.urls import patterns, url
 from django.shortcuts import render
 from django.contrib import admin
 
-from geoip.models import *
-from geoip.defaults import REDIS_SYNC_LOCK
+from geoip.models import (Provider, Country, City, Area, ISP, Range)
 from geoip.tasks import sync_redis_task
+from geoip.defaults import (
+    REDIS_SYNC_LOCK, REGISTER_PROVIDER_ON_ADMIN, REGISTER_GEO_ON_ADMIN
+)
 
 
 class ProviderAdmin(admin.ModelAdmin):
@@ -44,10 +46,13 @@ class ProviderAdmin(admin.ModelAdmin):
         return admin_urls + urls
 
 
-admin.site.register(Provider, ProviderAdmin)
+if REGISTER_PROVIDER_ON_ADMIN is True:
+    admin.site.register(Provider, ProviderAdmin)
 
-admin.site.register(Country)
-admin.site.register(City)
-admin.site.register(Area)
-admin.site.register(ISP)
-admin.site.register(Range)
+
+if REGISTER_GEO_ON_ADMIN is True:
+    admin.site.register(Country)
+    admin.site.register(City)
+    admin.site.register(Area)
+    admin.site.register(ISP)
+    admin.site.register(Range)

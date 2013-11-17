@@ -161,7 +161,7 @@ LOGGING = {
 
 GRAPPELLI_ADMIN_TITLE = 'Demo'
 
-GEO_BACKEND = 'redis'
+GEO_BACKEND = 'db'
 GEO_REDIS_TYPE = 'name'
 GEO_REDIS_DB = 4
 

@@ -1,6 +1,9 @@
-Default location, if location can not be detect
-Add backend for ipgeobase. Now supported only own db with providers & ISP.
+Fix: Move latitude and longitude to Range model
+Update database on server, after longitude & latitude migrated to Range model
+Default location, if location can not be detected
+Custom location data specified by user
+Ability to add custom data for each models
+Download+Sync current db from admin
 App usage without djcelery
 Py3.2 support
-Write about the superiority on docs & readme
-Download+Sync current db from admin
+NetSpeed support

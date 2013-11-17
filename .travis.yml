@@ -12,7 +12,7 @@ install:
   - pip install -e . --use-mirrors
   - pip install -r requirements/tests.txt Django==$DJANGO --use-mirrors
 before_script:
-  - flake8 --exclude=migrations --ignore="F403" geoip
+  - flake8 --exclude=migrations geoip
 script:
   - coverage run --branch --source=geoip `which django-admin.py` test geoip
   - coverage report --omit="geoip/test*,geoip/migrations/*,geoip/management/*"

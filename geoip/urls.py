@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 try:
-    from django.conf.urls.defaults import *
+    from django.conf.urls.defaults import patterns, url
 except ImportError:
-    from django.conf.urls import *
+    from django.conf.urls import patterns, url
 
 urlpatterns = patterns(
     'geoip.views',

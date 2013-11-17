@@ -20,9 +20,7 @@
         "pk": 1878,
         "model": "geoip.city",
         "fields": {
-            "latitude": "36.069492",
             "name": "Orel",
-            "longitude": "52.968452",
             "area": 102
         }
     },
@@ -51,7 +49,9 @@
             "isp": 4835,
             "end_ip": 1539541503,
             "provider": 1,
-            "start_ip": 1539540992
+            "start_ip": 1539540992,
+            "latitude": "36.069492",
+            "longitude": "52.968452"
         }
     }
 

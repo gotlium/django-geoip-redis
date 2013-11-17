@@ -11,7 +11,10 @@ from geoip.redis_wrapper import RedisClient
 from geoip.models import Range
 
 
-_RECORDS_KEYS = ('country', 'area', 'city', 'isp', 'provider')
+RECORDS_KEYS = (
+    'country', 'area', 'city', 'isp', 'provider',
+    'speed', 'latitude', 'longitude', 'postal_code', 'metro_code', 'domain'
+)
 
 
 def _from_redis(ip):
@@ -37,9 +40,19 @@ def _from_db(ip):
     obj = Range.objects.select_related().filter(
         start_ip__lte=ip, end_ip__gte=ip
     ).order_by('end_ip', '-start_ip')[:1][0]
+    field = lambda k: getattr(obj, k)
     if REDIS_TYPE == 'pk':
-        return map(lambda k: str(getattr(obj, k).pk), _RECORDS_KEYS)
-    return map(lambda k: str(getattr(obj, k)), _RECORDS_KEYS)
+        data = []
+        for key in RECORDS_KEYS:
+            value = field(key)
+            if hasattr(value, 'pk'):
+                data.append(str(value.pk))
+            elif value:
+                data.append(str(value))
+            else:
+                data.append('*')
+        return data
+    return map(lambda k: str(field(k) and field(k) or '*'), RECORDS_KEYS)
 
 
 def inet_aton(ip):
@@ -62,8 +75,8 @@ def record_by_request(request):
 
 
 def record_by_ip_as_dict(ip):
-    return dict(zip(_RECORDS_KEYS, record_by_ip(ip)))
+    return dict(zip(RECORDS_KEYS, record_by_ip(ip)))
 
 
 def record_by_request_as_dict(request):
-    return dict(zip(_RECORDS_KEYS, record_by_ip(get_ip(request))))
+    return dict(zip(RECORDS_KEYS, record_by_ip(get_ip(request))))
