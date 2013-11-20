@@ -3,7 +3,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from geoip.provider import LinkIspWithProvider
-from geoip.geo import record_by_ip
+from geoip.geo import record_by_ip, get_ip
 from geoip.defaults import BACKEND
 
 
@@ -19,7 +19,7 @@ def home(request):
 
 
 def ip_view(request, ip=None):
-    ip = ip if ip else request.META.get('REMOTE_ADDR')
+    ip = ip if ip else get_ip(request)
     record = record_by_ip(ip)
     if record:
         if BACKEND == 'db':

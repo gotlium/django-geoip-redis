@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+from geoip import get_version
+
 
 setup(
     name='django-geoip-redis',
-    version="1.2.2",
+    version=get_version(),
     description='Django GeoIP. Based on default DB or Redis.',
     keywords='django geoip mysql redis',
     long_description=open('README.rst').read(),

@@ -6,6 +6,8 @@ Performance
 * django-geoip-redis:
     - MySQL(SSD): 728 rps
     - SQLite(SSD): 46 rps
+    - MySQL: 349 rps
+    - SQLite: 19 rps
     - Redis: **3548 rps**
 
 * django-geoip(no isp, no provider):

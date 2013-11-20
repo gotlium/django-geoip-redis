@@ -27,8 +27,8 @@ class Country(models.Model):
 class Area(models.Model):
     country = models.ForeignKey(Country, verbose_name=_('Country'))
     name = models.CharField(_('Area'), max_length=255)
-    #code = models.CharField(_('Area code'), max_length=3)
-    #region_code = models.CharField(_('Region code'), max_length=2)
+    # code = models.CharField(_('Area code'), max_length=3)
+    # region_code = models.CharField(_('Region code'), max_length=2)
 
     def __unicode__(self):
         return self.name

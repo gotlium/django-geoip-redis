@@ -44,15 +44,19 @@ you can add ``GEO_BACKEND = 'db'`` into local_settings.py
 Performance:
 -----------
 * django-geoip-redis:
+    - PostgreSQL(SSD): 85 rps
     - MySQL(SSD): 728 rps
     - SQLite(SSD): 46 rps
+    - PostgreSQL: 63 rps
+    - MySQL: 349 rps
+    - SQLite: 19 rps
     - Redis: **3548 rps**
 
-* django-geoip(no isp, no provider):
+* django-geoip(no isp, no provider, no netspeed, no domain):
     - MySQL(SSD): 855 rps
     - SQLite(SSD): 47 rps
 
-* django.contrib.gis.geoip.GeoIP(no isp, no provider, not free, but C API):
+* django.contrib.gis.geoip.GeoIP(no isp, no provider, no netspeed, no domain, not free, but C API):
     - standard: 4666 rps
     - memory: 73 rps
     - check: 4510 rps
@@ -66,7 +70,7 @@ Tested on Ubuntu 12.04(x86_64), Django(1.6), uWSGI(1.0.3), Nginx(1.1.19) with Ap
     $ ab -c 100 -n 1000 http://localhost/ip/91.195.136.52/
 
 
-| On tests used default configuration for Redis & MySQL without any modifications.
+| On tests used default configuration for PostgreSQL, MySQL & Redis without any modifications.
 |
 | Demo page available `here <http://geoip-gotlium.rhcloud.com/ip/91.195.136.52/>`_.
 
