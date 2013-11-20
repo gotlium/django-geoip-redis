@@ -1,5 +1,4 @@
 Update database on server, after longitude & latitude migrated to Range model
-Default location, if location can not be detected
 Custom location data specified by user
 Ability to add custom data for each models
 Download+Sync current db from admin

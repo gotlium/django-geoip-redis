@@ -33,3 +33,7 @@ REGISTER_PROVIDER_ON_ADMIN = getattr(
 
 REGISTER_GEO_ON_ADMIN = getattr(
     settings, 'GEO_REGISTER_GEO_ON_ADMIN', True)
+DEFAULT_LOCATION = getattr(
+    settings, 'GEO_DEFAULT_LOCATION', [
+        'Russian Federation', 'Moscow', 'Moscow', 'RU-CENTER', 'RU-NIC'
+    ])

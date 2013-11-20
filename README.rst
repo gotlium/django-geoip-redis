@@ -45,11 +45,11 @@ Performance:
 -----------
 * django-geoip-redis:
     - PostgreSQL(SSD): 85 rps
-    - MySQL(SSD): 728 rps
     - SQLite(SSD): 46 rps
+    - MySQL(SSD): 728 rps
     - PostgreSQL: 63 rps
-    - MySQL: 349 rps
     - SQLite: 19 rps
+    - MySQL: 349 rps
     - Redis: **3548 rps**
 
 * django-geoip(no isp, no provider, no netspeed, no domain):

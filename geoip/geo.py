@@ -6,10 +6,9 @@ __all__ = ["inet_aton", "record_by_ip", "record_by_request", "get_ip",
 import struct
 import socket
 
-from geoip.defaults import BACKEND, REDIS_TYPE
+from geoip.defaults import BACKEND, REDIS_TYPE, DEFAULT_LOCATION
 from geoip.redis_wrapper import RedisClient
 from geoip.models import Range
-
 
 RECORDS_KEYS = (
     'country', 'area', 'city', 'isp', 'provider',
@@ -23,24 +22,27 @@ def _from_redis(ip):
     data = r.zrangebyscore("geoip", ip, 'inf', 0, 1, withscores=True)
 
     if not data:
-        return
+        return DEFAULT_LOCATION
 
     res, score = data[0]
     geo_id, junk, prefix = res.decode().split(":", 2)
 
     if prefix == "s" and score > ip:
-        return
+        return DEFAULT_LOCATION
 
     info = r.get("geoip:%s" % junk)
     if info is not None:
         return info.decode('utf-8', 'ignore').split(':')
+    return DEFAULT_LOCATION
 
 
 def _from_db(ip):
     obj = Range.objects.select_related().filter(
         start_ip__lte=ip, end_ip__gte=ip
-    ).order_by('end_ip', '-start_ip')[:1][0]
-    field = lambda k: getattr(obj, k)
+    ).order_by('end_ip', '-start_ip')[:1]
+    if not obj.exists():
+        return DEFAULT_LOCATION
+    field = lambda k: getattr(obj[0], k)
     if REDIS_TYPE == 'pk':
         data = []
         for key in RECORDS_KEYS:
