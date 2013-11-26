@@ -43,3 +43,5 @@ db.sqlite
 *.sh
 *.zip
 openshift-*
+.DS_Store
+docs/maxmind.rst

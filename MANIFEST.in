@@ -1,2 +1,1 @@
-recursive-exclude * .DS_Store
-recursive-include geoip *.py *.html *.txt *.po
+recursive-include geoip *.py *.html *.po *.mo

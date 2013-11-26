@@ -78,7 +78,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -88,7 +88,7 @@ SECRET_KEY = 'rl+c(vz0tc(&amp;svm*va9=+$q_$c%i#qb0p@tkc-p37y_$b@aj6e'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -97,9 +97,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'geoip.middleware.LocalIPFix',
     'geoip.middleware.GeoMiddleware',
     # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'demo.urls'
@@ -164,6 +165,10 @@ GRAPPELLI_ADMIN_TITLE = 'Demo'
 GEO_BACKEND = 'redis'
 GEO_REDIS_TYPE = 'name'
 GEO_REDIS_DB = 4
+
+
+LOCAL_IP_FIX = '91.195.136.52'
+LOCAL_SSL = False
 
 
 try:

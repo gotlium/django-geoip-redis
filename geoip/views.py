@@ -2,9 +2,9 @@
 
 from django.http import HttpResponse
 from django.shortcuts import render
+
 from geoip.provider import LinkIspWithProvider
 from geoip.geo import record_by_ip, get_ip
-from geoip.defaults import BACKEND
 
 
 def home(request):
@@ -13,32 +13,19 @@ def home(request):
     Example:
         print request.geo
     """
+    # todo: move into template form, and print request.geo, if info was found
+    middleware_info = ', '.join(request.geo.values()) if request.geo else ''
     return HttpResponse("""
         <a href="/ip/91.195.136.52/">IP info</a>
-    """)
+        <p>%s</p>
+    """ % middleware_info)
 
 
 def ip_view(request, ip=None):
-    ip = ip if ip else get_ip(request)
-    record = record_by_ip(ip)
-    if record:
-        if BACKEND == 'db':
-            data = (
-                record.country, record.area,
-                record.city, record.isp,
-                record.provider
-            )
-        else:
-            data = (
-                record[0], record[1],
-                record[2], record[3],
-                record[4]
-            )
-
-        return HttpResponse(
-            '%s, %s, %s, %s, %s' % data
-        )
-    return HttpResponse('No info about: %s' % ip)
+    record = record_by_ip(ip if ip else get_ip(request))
+    if record is not None:
+        return HttpResponse(','.join(record))
+    return HttpResponse('No data found')
 
 
 def show_range_isp(request):

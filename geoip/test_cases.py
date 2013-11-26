@@ -10,26 +10,31 @@ LIST_DATA = [
     '*', '*', '*'
 ]
 
+EXISTING_IP = '91.195.136.52'
+NOT_EXISTING_IP = '194.85.91.253'
 
+
+# todo: add tests for home, ip_view & show_range_isp views
+# todo: tests for LinkIspWithProvider
+# todo: tests for Middleware
+# todo: geo.py tests
+# todo: tests for celery queue
+# todo: sync tests
 class GeoIPTestCase(TestCase):
     fixtures = ['tests_fixture.json']
 
-    def test_a_redis(self):
-        geo.BACKEND = 'redis'
-        ip_range = geo.record_by_ip('91.195.136.52')
-        self.assertListEqual(LIST_DATA, ip_range)
+    def _test_rule(self, backend, ip, data):
+        geo.BACKEND = backend
+        self.assertListEqual(data, geo.record_by_ip(ip))
 
-    def test_b_redis_default(self):
-        geo.BACKEND = 'redis'
-        ip_range = geo.record_by_ip('194.85.91.253')
-        self.assertListEqual(defaults.DEFAULT_LOCATION, ip_range)
+    def test_redis(self):
+        self._test_rule('redis', EXISTING_IP, LIST_DATA)
 
-    def test_c_db(self):
-        geo.BACKEND = 'db'
-        ip_range = list(geo.record_by_ip('91.195.136.52'))
-        self.assertListEqual(LIST_DATA, ip_range)
+    def test_redis_default(self):
+        self._test_rule('redis', NOT_EXISTING_IP, defaults.DEFAULT_LOCATION)
 
-    def test_d_db_default(self):
-        geo.BACKEND = 'db'
-        ip_range = list(geo.record_by_ip('194.85.91.253'))
-        self.assertListEqual(defaults.DEFAULT_LOCATION, ip_range)
+    def test_db(self):
+        self._test_rule('db', EXISTING_IP, LIST_DATA)
+
+    def test_db_default(self):
+        self._test_rule('db', NOT_EXISTING_IP, defaults.DEFAULT_LOCATION)
