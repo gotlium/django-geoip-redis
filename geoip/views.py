@@ -16,8 +16,8 @@ def home(request):
     # todo: move into template form, and print request.geo, if info was found
     middleware_info = ', '.join(request.geo.values()) if request.geo else ''
     return HttpResponse("""
-        <a href="/ip/91.195.136.52/">IP info</a>
-        <p>%s</p>
+        <a href="/ip/91.195.136.52/">Information by given IP</a>
+        <p><strong>Default location or auto-detected:</strong> %s</p>
     """ % middleware_info)
 
 
