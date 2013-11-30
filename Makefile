@@ -10,4 +10,5 @@ pep8:
 	flake8 --exclude=migrations geoip
 open_docs:
 	open docs/.build/html/index.html
-
+run:
+	cd demo && ./manage.py syncdb && ./manage.py migrate && ./manage.py runserver_plus --print-sql --threaded

@@ -52,7 +52,7 @@ def _from_db(ip):
             elif value:
                 data.append(str(value))
             else:
-                data.append('*')
+                data.append('')
         return data
     return map(lambda k: str(field(k) and field(k) or '*'), RECORDS_KEYS)
 

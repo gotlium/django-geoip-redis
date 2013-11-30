@@ -27,11 +27,11 @@ class RedisSync(RedisClient):
 
     def _get_val(self, key):
         if not hasattr(getattr(self.instance, key), defaults.REDIS_TYPE):
-            return '*'
+            return ''
         return getattr(getattr(self.instance, key), defaults.REDIS_TYPE)
 
     def _get_null_val(self, val):
-        return str(val if val else '*')
+        return str(val if val else '')
 
     def save_data(self):
         self.set(
