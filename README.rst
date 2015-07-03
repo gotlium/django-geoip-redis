@@ -41,7 +41,7 @@ If you want use native db for local development,
 you can add ``GEO_BACKEND = 'db'`` into local_settings.py
 
 
-Performance:
+Performance
 -----------
 * django-geoip-redis:
     - PostgreSQL(SSD): 85 rps
@@ -75,10 +75,11 @@ Tested on Ubuntu 12.04(x86_64), Django(1.6), uWSGI(1.0.3), Nginx(1.1.19) with Ap
 | Demo page available `here <http://geoip-gotlium.rhcloud.com/ip/91.195.136.52/>`_.
 
 
-Compatibility:
+
+Compatibility
 -------------
-* Python: 2.6, 2.7, 3.3
-* Django: 1.3.x, 1.4.x, 1.5.x, 1.6
+* Python: 2.6, 2.7, 3.3, 3.4
+* Django: 1.4 - 1.8
 
 
 .. image:: https://d2weczhvl823v0.cloudfront.net/gotlium/django-geoip-redis/trend.png
