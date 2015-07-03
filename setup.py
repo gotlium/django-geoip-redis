@@ -23,6 +23,7 @@ setup(
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
     ],
     author="GoTLiuM InSPiRiT",
     author_email='gotlium@gmail.com',
@@ -37,10 +38,9 @@ setup(
     ]},
     zip_safe=False,
     install_requires=[
-        'redis>=2.8.0',
-        'hiredis>=0.1.1',
-        'ipaddress>=1.0.6',
-        'django-celery>=3.0.23',
-        'requests>=2.0.1',
+        'redis',
+        'hiredis',
+        'ipaddress',
+        'requests',
     ]
 )

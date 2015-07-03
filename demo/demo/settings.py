@@ -127,7 +127,7 @@ INSTALLED_APPS = (
 
     'django_extensions',
     # 'djcelery',
-    'south',
+    # 'south',
     'geoip',
 )
 

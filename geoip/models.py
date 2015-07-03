@@ -42,6 +42,12 @@ class Area(models.Model):
 class City(models.Model):
     area = models.ForeignKey(Area)
     name = models.CharField(_('City name'), max_length=255)
+    latitude = models.DecimalField(
+        max_digits=9, decimal_places=6, blank=True, null=True,
+        verbose_name=_('Latitude'))
+    longitude = models.DecimalField(
+        max_digits=9, decimal_places=6, blank=True, null=True,
+        verbose_name=_('Longitude'))
 
     def __unicode__(self):
         return self.name
