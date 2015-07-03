@@ -162,7 +162,7 @@ if BACKEND == 'redis':
             RedisSync().sync_instance(instance)
 
 
-if not 'loaddata' in sys.argv:
+if 'loaddata' not in sys.argv:
     @receiver(m2m_changed, sender=Provider.isp.through, dispatch_uid="prov")
     def save_provider(sender, instance, action, *args, **kwargs):
         if action == 'post_clear':

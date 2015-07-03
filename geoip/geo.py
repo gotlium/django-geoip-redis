@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
-__all__ = ["inet_aton", "record_by_ip", "record_by_request", "get_ip",
-           "record_by_ip_as_dict", "record_by_request_as_dict"]
-
 import struct
 import socket
 
 from geoip.defaults import BACKEND, REDIS_TYPE, DEFAULT_LOCATION
 from geoip.redis_wrapper import RedisClient
 from geoip.models import Range
+
+__all__ = ["inet_aton", "record_by_ip", "record_by_ip_as_dict"]
 
 RECORDS_KEYS = (
     'country', 'area', 'city', 'isp', 'provider',
@@ -61,24 +60,9 @@ def inet_aton(ip):
     return struct.unpack('!L', socket.inet_aton(ip))[0]
 
 
-def get_ip(request):
-    ip = request.META['REMOTE_ADDR']
-    if 'HTTP_X_FORWARDED_FOR' in request.META:
-        ip = request.META['HTTP_X_FORWARDED_FOR'].split(',')[0]
-    return ip
-
-
 def record_by_ip(ip):
     return (_from_redis if BACKEND == 'redis' else _from_db)(inet_aton(ip))
 
 
-def record_by_request(request):
-    return record_by_ip(get_ip(request))
-
-
 def record_by_ip_as_dict(ip):
     return dict(zip(RECORDS_KEYS, record_by_ip(ip)))
-
-
-def record_by_request_as_dict(request):
-    return dict(zip(RECORDS_KEYS, record_by_ip(get_ip(request))))

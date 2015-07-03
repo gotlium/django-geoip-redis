@@ -2,9 +2,10 @@
 
 from django.http import HttpResponse
 from django.shortcuts import render
+from ipware.ip import get_real_ip
 
 from geoip.provider import LinkIspWithProvider
-from geoip.geo import record_by_ip, get_ip
+from geoip.geo import record_by_ip
 
 
 def home(request):
@@ -22,7 +23,7 @@ def home(request):
 
 
 def ip_view(request, ip=None):
-    record = record_by_ip(ip if ip else get_ip(request))
+    record = record_by_ip(ip if ip else get_real_ip(request))
     if record is not None:
         return HttpResponse(','.join(record))
     return HttpResponse('No data found')
