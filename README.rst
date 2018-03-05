@@ -6,10 +6,10 @@ Django-GeoIP-Redis
     :target: https://travis-ci.org/gotlium/django-geoip-redis
 .. image:: https://coveralls.io/repos/gotlium/django-geoip-redis/badge.png?branch=master
     :target: https://coveralls.io/r/gotlium/django-geoip-redis?branch=master
-.. image:: https://pypip.in/v/django-geoip-redis/badge.png
+.. image:: https://img.shields.io/pypi/v/django-geoip-redis.svg
     :alt: Current version on PyPi
     :target: https://crate.io/packages/django-geoip-redis/
-.. image:: https://pypip.in/d/django-geoip-redis/badge.png
+.. image:: https://img.shields.io/pypi/dm/django-geoip-redis.svg
     :alt: Downloads from PyPi
     :target: https://crate.io/packages/django-geoip-redis/
 
